@@ -1,0 +1,99 @@
+[defaults]
+quality = 100
+keyframes = 15
+codec = DivX ;-) low-motion
+attributes = BitRate=4000,Crispness=100
+source = Television
+norm = pal
+verbose = 1
+freqtab = europe-west
+
+[BRT]
+channel = 24
+fine = +0 
+
+[KA2]
+channel = 23
+fine = +0
+
+[VTM]
+channel = 22
+fine = +0
+
+[ROB]
+channel = 47
+fine = +0
+
+[RTBF]
+channel = 34
+fine = +0
+
+[RTBF2]
+channel = 43
+fine = +0
+
+[TVE]
+channel = 33
+fine = +0
+
+[MGM]
+channel = SE14
+fine = +0
+
+[MTV]
+channel = SE10
+fine = +0
+
+[CNN]
+channel = SE9
+fine = +0
+
+[CANVAS]
+channel = 39
+fine = +0
+
+[KETNET]
+channel = 39
+fine = +0
+
+[VT4]
+channel = SE13
+fine = +0
+
+[E]
+channel = 54
+fine = +0
+
+[Z]
+channel = 58
+fine = +0
+
+[NED1]
+channel = E9
+fine = +0
+
+[NED2]
+channel = E11
+fine = +0
+
+[NED3]
+channel = 49
+fine = +0
+
+[BBC1]
+channel = SE15
+fine = +0
+
+[BBC2]
+channel = 51
+fine = +0
+
+[EURONEWS]
+channel = SE18
+fine = +0
+
+[NED3]
+channel = 49
+
+[Video]
+channel = 36

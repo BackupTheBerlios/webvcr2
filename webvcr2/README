@@ -1,0 +1,23 @@
+WebVCR cvs 
+(c) 2001 Wim Vandersmissen // wim@bofh.be
+GPL
+
+What?
+-----
+
+WebVcr is a tool which enables you to record television programs with your
+Video4Linux TV card trough a web browser.
+
+Where?
+------
+
+Stable version:
+
+You can download it from http://webvcr.sourceforge.net
+
+CVS version:
+
+You can browse the cvs at http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/webvcr/webvcr
+You can retrieve the cvs version by typing the following cvs commands:
+cvs -d:pserver:anonymous@cvs.webvcr.sourceforge.net:/cvsroot/webvcr login
+cvs -z3 -d:pserver:anonymous@cvs.webvcr.sourceforge.net:/cvsroot/webvcr co webvcr

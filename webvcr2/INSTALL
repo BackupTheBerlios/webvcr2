@@ -1,0 +1,95 @@
+WebVCR cvs 
+(c) 2001 Wim Vandersmissen // wim@bofh.be
+GPL
+
+Requirements:
+-------------
+	Perl
+	PHP 4.0.4pl1 (with mysql, and curl (http://curl.haxx.se)
+	phpwebtools 0.2.3 (http://phpwebtools.sourceforge.net)
+	Mysql 3.23.36
+	Perl Modules (DBI, LWP, DBD::Mysql) #LWP not really needed anymore
+	VCR (http://www.stack.nl/~brama/vcr/)  (and/or xawtv)
+
+Installation:
+-------------
+	copy everything to a directory that's accessible via WWW
+	e.g. /var/www/html/webvcr 
+
+	cd to the directory where you installed the files
+	and execute the following command
+
+	$ perl -pi -e "s#/var/www/html/webvcr/settings\.php#/directory/where/you/installed/it/settings\.php#g" *.pl
+
+	Xawtv or VCR
+	------------
+	If you haven't use vcr before you can just put a link 
+	from ~/.vcrrc to ~/.xawtv
+	If you have used vcr you know what the use of the ~/.vcrrc file is, if you
+	don't -> RTFM
+	
+	Apache
+	------
+
+	Add "Alias /webvcr /var/www/html/webvcr" to your httpd.conf
+	$ echo "Alias /webvcr /var/www/html/webvcr" >> /etc/httpd/httpd.conf
+
+	Restart apache
+	$ /etc/init.d/httpd restart
+
+	Time to configure vcrweb point your browser to
+	http://localhost/webvcr/init.php
+
+	After initializing the database, don't forget to copy && paste the
+	lines to settings.php , otherwise it won't work.	
+
+	Now go to
+	http://localhost/webvcr/config.php and set all your options
+	(default options give the best quality/diskspace ratio for me)
+
+	click on 'run collector' (choose advalvas for now)
+
+	You'll be presented with a list of all possible stations (the program
+	scans and parses the advalvas.be page). 
+
+	Select the one you like to use (default all are enabled).
+	Next you'll be presented a page with the station names, the right column
+	must match the names you use in your ~/.xawtv (or ~/.vcrrc) file !! 
+	
+	Crontab
+	-------
+	Adding the necessary stuff to /etc/crontab
+	vcr-cron.pl is the program that actually does the recording, and it needs
+	to check the database every minute
+	
+	$ echo "* * * * * root /var/www/html/webvcr/vcr-cron.pl" >> /etc/crontab
+
+	advalvas.pl connects to advalvas.be and parses the tv-listings and puts them
+	into the database.
+	$ cp /var/www/html/webvcr/advalvas.pl /etc/cron.daily/
+	$ chmod 755 /etc/cron.daily/advalvas.pl
+
+	Or if you got the php binary with curl compiled in you can run
+	$ php /var/www/html/webvcr/advalvas-slurp.php
+	
+	Ofcourse you can also browse to 
+		http://localhost/webvcr/advalvas-slurp.php?WEB=1
+
+RUNNING IT
+----------
+Just point your browser to http://localhost/webvcr/index.php
+
+NOTES
+-----
+- Webvcr will complain if you try to record 2 programs of which the running time
+  will collapse with other.
+- Webvcr will start encoding programs 2 minutes before the start indicated on
+  the TV listing, it will also ends 2 minutes later.
+  This means that you can't 'record' 2 programs after eachother, you'll have
+  to use the manually recording for that.
+  If you want to change that behaviour you'll have to edit vcr-cron.pl
+- Manually recorded programs will have priority over automatically recorded
+  ones!
+- Manually recorded programs will not be flushed from the database when the
+  daily TV listing is being updated.
+

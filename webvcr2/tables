@@ -1,0 +1,59 @@
+create table collector(
+name varchar(100),
+mainurl varchar(100),
+baseurl varchar(255),
+collectorid int not null auto_increment,
+primary key(collectorid));
+
+create table station(
+sid int not null auto_increment,
+sname varchar(100),
+collectorid int,
+suburl varchar(100),
+rname varchar(100),
+channel int,
+primary key(sid),
+key(collectorid));
+
+create table program(
+pid int not null auto_increment,
+sid int not null,
+pname varchar(100),
+start datetime,
+stop datetime,
+record int,
+flag int,
+primary key(pid));
+
+create table specs(
+pid int not null,
+bitrate int,
+framerate int,
+height int,
+width int,
+id int not null auto_increment,
+primary key(id));
+
+create table codec(
+name varchar(100),
+cid int not null auto_increment,
+primary key(cid));
+
+create table codecconfig(
+cid int,
+bitrate int,
+crispness int);
+
+create table config(
+name varchar(255),
+value varchar(255),
+id int not null auto_increment,
+primary key(id));
+
+flag=0 (normal recording)
+flag=1 (manual recording)
+flag=2 (recording when the program already started)
+flag=3 (programma is een film)
+
+savedir standaard /mnt zetten
+collector standaard op 1 zetten

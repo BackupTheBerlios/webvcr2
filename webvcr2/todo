@@ -1,0 +1,21 @@
+ùtfmù uw tool kan misschien eerst /sbin/fuser -k /dev/bttv doen ? ;)
+      (rsmeyers@horsea.3ti.be) [22:19]
+(BjorNie) 'n avond allemaal
+[ùtfmù] 0.3 is al uit met bugfixes :-)
+-+- SetAway   : (tfm) movie
+[ùtfmù] aha! das geen slecht idee
+-+- SetAway   : (tfm) movie
+ùtfmù of video0  (rsmeyers@horsea.3ti.be) [22:19]
+ùtfmù en zelfde voor mixer enzo  (rsmey
+
+lijst van wat geprogrammeerd.
+
+ùCondorù of newsplanet .. of eurotv .. of advalvas
+         (~noway@nchobo01.telenet-ops.be) [00:17]
+
+from rufustfirefly:
+ * implement dynamic generation of vcr parameters (codec, etc) from
+   SQL database
+ * allow addition of codecs, with list of acceptable codec parameters
+ * channels must be moved into ~/.vcrrc at some point automatically
+

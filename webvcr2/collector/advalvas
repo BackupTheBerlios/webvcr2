@@ -1,0 +1,1 @@
+cat tv.dll\?Show\?NL\&TV1 |perl -ne 'if (/\<b\>(.*)\<\/b\>/) {print "$1\n"} if (/(\d+:\d+)/){print "$1\n";}'

@@ -1,0 +1,40 @@
+ChangeLog
+($Id: ChangeLog,v 1.1 2002/02/09 17:45:17 waldb Exp $)
+* Tue Jul 03 2001 dolphinbofh
+  - fixed recording bugs in force.php 
+  - some HTML tidying up 
+  (thanks to David Biczo and Andreas Busch)
+
+* Mon May 14 2001 rufustfirefly
+  - added ability to generate "~/.vcrrc" from the database via
+    vcrrc class
+
+* Thu May 10 2001 rufustfirefly
+  - moved functions.php -> lib/functions.php
+  - allow channel editing from inside WebVCR with the intention of
+    generating ~/.vcrrc automagically at some point
+  - implemented collector modules and phpwebtools loadable module
+    structures
+
+* Wed May 09 2001 rufustfirefly
+  - implemented phpwebtools (http://phpwebtools.sourceforge.net/) for
+    basic SQL calls, have not implemented class.sql.php wrapper for
+    insert/update queries
+  - general PHP overhaul of codebase
+    - addslashes and htmlentities implemented for security
+    - warnings/errors hidden and/or worked around
+  - started changelog
+
+
+0.4b	Added Ramses Smeyers <ramses@smeyers.be> layout patches
+		Readme update
+		Misc updates 
+                
+0.4	Started using advalvas instead of eurotv
+		IMDB support
+		More stations support
+		XawTV support extended
+0.3	Released to some friends
+0.2	Released to some friends
+0.1	Not released
+
