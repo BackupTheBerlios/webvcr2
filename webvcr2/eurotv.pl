@@ -1,43 +1,75 @@
-#!/usr/bin/perl
+#!/usr/bin/perl 
 #(c)1997-2001 wim@bofh.be
+# addons by waldb@users.berlios.de
+# 
+# This script should be run by cron every day to fetch new program info
+# 
+# error handling is very bad, something for todo list
+#use strict;
 use LWP;
 use LWP::UserAgent;
 use DBI();
+#
+# some global vars
+#
+my $host="http://www.eurotv.com:80";
 
-open(f,"global.inc");
-while(<f>) {
+# 
+# parse global parameters
+#
+open(GLOBAL,"global.inc");
+while(<GLOBAL>) {
 	if (!/\?/){ eval $_;}
 }
-close(f);
+close(GLOBAL);
+
+# 
+# main procedure
+# 
 
 # Connect to the database.
 my $dbh = DBI->connect("DBI:mysql:database=$sql_db;host=$sql_host","$sql_user", "$sql_pass", {'RaiseError' => 1});
 
-$dbh->do("delete from program where flag=0 or flag=2 or flag=3"); # don't delete manually recorded programs!
+# don't delete manually recorded programs!
+$dbh->do("delete from program where flag=0 or flag=2 or flag=3"); 
 
 my $sth = $dbh->prepare("select collectorid from collector where name='eurotv'");
 $sth->execute();
 while (my $ref = $sth->fetchrow_hashref()) {
-        $collectorid=$ref->{'collectorid'};
+  $collectorid=$ref->{'collectorid'};
 }
 $sth->finish();
  
 # populating %urls from data out of mysql
-my $sth = $dbh->prepare("SELECT * FROM station where collectorid='$collectorid'");
+$sth = $dbh->prepare("SELECT * FROM station where collectorid='$collectorid'");
 $sth->execute();
 while (my $ref = $sth->fetchrow_hashref()) {
-        $urls{$ref->{'rname'}}=$ref->{'suburl'}
+  $urls{$ref->{'rname'}}=$ref->{'suburl'}
 }
 $sth->finish();
-$host="http://www.eurotv.com:80";
-$now=localtime;
 
+# 
+# checks to find the right number of the day.
+$numberofday=&checkhtm; 
+
+foreach $zenders (keys %urls) { 
+  @uur=();@programma=();@film=();
+  $inhoud=&connecttohttpd($urls{$zenders});
+  &parseinhoud($inhoud);
+  &printit;
+}
+
+
+
+# Subroutines
 
 ################################################################################
 # checks what number should be used today (because the number of day differs)  #
 ################################################################################
 sub checkhtm {
-  my($url)=@_;
+  my $now=localtime();
+  my $tmp;
+  my @tmp;
   my $inhoud=();
   my $ua = new LWP::UserAgent;
   $ua->agent("Mozilla/4.5 [en] (Win98; I)");
@@ -50,19 +82,21 @@ sub checkhtm {
   if ($res->is_success) {
     $inhoud= $res->content;
   } else { }
-  my @temp=split(/ /,$now);
-  my $dag=$temp[0];
-  my $dagnr=$temp[2];
-  my @temp2=split(/\n/,$inhoud);
-  foreach $lijn (@temp2) {
-    if ($lijn =~ /$dag/)
-    {$lijn=~ s/\//g; 
-	  if ($lijn =~/\<A HREF=\"(\d).*\>(\w+) (\d+).*\<BR\>/) 
-			{
-			if ($dagnr eq $3) { return($1); }
-			else { die "today not found .. error\n";}
-			}
-#      $numberofday=$temp3[0]; # now we get something like [0-9]a ; that's being used in the URL
+  my $dagnr=$now[3];
+  $tmp=$now[6];
+  my $dag=("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")[$tmp];
+  @tmp=split(/\n/,$inhoud);
+  foreach $lijn (@tmp) {
+    while ($lijn =~ /$dag/) {
+      $lijn=~ s/\^M//g; 
+      if ($lijn =~/\<A HREF=\"(\d).*\>(\w+) (\d+).*\<BR\>/) {
+        if ($dagnr eq $3) { 
+          return($1); 
+        } else { 
+          print "some error occured, I think my regex didn't match\n";
+          exit 1;
+        }
+      }
     }
   }
 }
@@ -116,16 +150,15 @@ sub parseinhoud{
 # finally prints the data to stdout                                           #
 ###############################################################################
 sub printit {
-my $flag=0;
-my $i=1;
-my $temp=0;
-my @tempje=("0");
-  #my $tempje[0]=0;
-for ($[ .. $#uur) 
-{ #print "$zenders\t";
+  my $flag=0;
+  my $i=1;
+  my $temp=0;
+  my @tempje=("0");
+  for ($[ .. $#uur) { 
+  #print "$zenders\t";
 	if ($_ == $#uur) { #print "$uur[$_]- 99:99\t"; 
-    } else { 
- #clumsy hack, fix it someday :)
+  } else { 
+  #clumsy hack, fix it someday :)
 	@blah=split(/:/,$uur[$_]);
 	@blah2=split(/:/,$uur[$_+1]);
 	$blah[0]=~s/^0//;
@@ -173,23 +206,15 @@ for ($[ .. $#uur)
 }
 }
 
-sub getstation{
-my $station=$_[0];
-my $sth = $dbh->prepare("SELECT * FROM station where sname = '$station'");
-$sth->execute();
-while (my $ref = $sth->fetchrow_hashref()) {
-	$station=$ref->{'sid'}
-}
-$sth->finish();
-return ($station)
+sub getstation {
+  my $station=$_[0];
+  my $sth = $dbh->prepare("SELECT * FROM station where sname = '$station'");
+  $sth->execute();
+  while (my $ref = $sth->fetchrow_hashref()) {
+	  $station=$ref->{'sid'}
+  }
+  $sth->finish();
+  return ($station)
 }
 
-$numberofday=&checkhtm; #checks to find the right number of the day.
-foreach $zenders (keys %urls) 
-{ @uur=();@programma=();@film=();
-  $inhoud=&connecttohttpd($urls{$zenders});
-  &parseinhoud($inhoud);
-  &printit;
-#  print "\n-\n";
-}
 
