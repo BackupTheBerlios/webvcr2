@@ -1,5 +1,5 @@
 <?php
- // $Id: init.php,v 1.3 2002/02/10 10:23:06 waldb Exp $
+ // $Id: init.php,v 1.4 2002/02/15 23:51:01 waldb Exp $
 
 include("global.inc");
 
@@ -100,7 +100,7 @@ if ( isset($PASS) && ($PASS != "") ) {
 	$sql->query("insert into config values ('timetostart','2',NULL)");
 	$sql->query("insert into config values ('timetoend','2',NULL)");
 	$sql->query("insert into config values ('codec','1',NULL)");
-	$sql->query("insert into config values ('collectorid','1',NULL)");
+	$sql->query("insert into config values ('collectorid','2',NULL)");
 	$sql->query("insert into config values ('keyframes','15',NULL)");
 	$sql->query("insert into config values ('quality','100',NULL)");
 	$sql->query("insert into config values ('recordsource','television',NULL)");
@@ -149,7 +149,7 @@ Root Password of MySQL</td><td>:</td>
 	<td><input type=text name=USERNAME value="tvuser"></td></tr>
 </tr>
 <td>Password</td><td>:</td>
-	<td><input type=PASSWORD name=PASSWORD value="dolphin"></td></tr>
+	<td><input type=PASSWORD name=PASSWORD value=""></td></tr>
 </table>
 	<INPUT TYPE=SUBMIT NAME=SUBMIT VALUE="Create">
 </form>
