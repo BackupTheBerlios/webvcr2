@@ -1,5 +1,5 @@
 <?php
- // $Id: eurotv.collector.module.php,v 1.1 2002/02/09 17:45:23 waldb Exp $
+ // $Id: eurotv.collector.module.php,v 1.2 2002/02/12 23:27:44 waldb Exp $
 
 if (!defined("__EUROTV_COLLECTOR_MODULE_PHP__")) {
 
@@ -23,14 +23,14 @@ class eurotvCollector extends collectorModule {
 			print_header_open();
 			print_title ("Eurotv");
 			print_header_close();
-	
+			/*	
 			print "Deleting station and program settings.<br>\n";
 			$collectorid = getcollectorid("eurotv");
 			$query = "DELETE FROM station WHERE collectorid='".addslashes($collectorid)."'";
 			$sql->query($query);
 			$query = "DELETE FROM program";
 			$sql->query($query);
-	
+			*/
 			echo "<p>Scanning eurotv...<br>\n";
 			echo "Stations found: <br>\n";
 			print "
@@ -52,18 +52,7 @@ class eurotvCollector extends collectorModule {
 					$lijn = preg_replace("/.*HREF=\"\/(.*)\.htm\"\>(.*)?\<\/a\>.*/","\\1##\\2",$lijn);
 					list($url,$name) = split("##",$lijn);
 					$url = preg_replace("/^sl/","",$url);
-					$query = "INSERT into station values ('NULL','$name','2','$url','$name')";
-					$result = $sql->query($query);
-			 		$sid = $sql->last_record($result);    
-					print "
-					<TR>
-						<TD>".prepare($name)."</TD>
-						<TD>
-							<input type=CHECKBOX NAME=\"T".htmlentities($sid).
-							"\" VALUE=\"1\" CHECKED>
-						</TD>
-					</TR>
-					";
+					print "<tr><td>$name</td><td><input type=checkbox name=$url value=1></td></tr>\n";
 					//print $lijn;
 					$i++;
 				} // end if matches link
@@ -75,6 +64,69 @@ class eurotvCollector extends collectorModule {
 			print_page_close();
 		} // end if fd
 	} // end function eurotvCollector->view
+
+	function choose () {
+		while(list($k, $v) = each($GLOBALS)) global $$k;
+
+		$collectorid = getcollectorid("eurotv");
+		$query = "DELETE FROM station ".
+			"WHERE collectorid='".addslashes($collectorid)."'";
+		$sql->query($query);
+		$query = "DELETE FROM program";
+		$sql->query($query);
+	
+		print_header_open();
+		print_title ("Choose Stations for ".$this->MODULE_NAME);
+		print_header_close();
+		
+		print "
+                        <FORM ACTION=\"".page_name()."\" METHOD=POST>
+                        <INPUT TYPE=HIDDEN NAME=\"module\" VALUE=\"".prepare($module)."\">
+                        <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>
+                        <TR BGCOLOR=\"#ccccff\">
+                                <TD><B>Original Name</B></TD>
+                                <TD><B>xawtv Name</B></TD>
+                                <TD><B>Channel</B></TD>
+                        </TR>
+                ";
+		
+        while(list($name,$value)=each($HTTP_POST_VARS)) {
+                if ($value==1) {
+                $suburl = $name;
+                $channel_name = preg_replace("/_/"," ",$name);
+                $channel_name = preg_replace("/\|/","+",$channel_name);
+				$query=$sql->insert_query(
+					"station",
+					array(
+						"sname"	=> $this->transformName($channel_name),
+						"collectorid" => $collectorid,
+						"suburl" => $suburl,
+						"rname" => $this->transformName($channel_name),
+						"channel" => "0"
+						)
+				);
+				$result = $sql->query($query);
+				$sid = $sql->last_record($result);
+                print "
+				<TR>
+						<TD>".prepare($channel_name)."</TD>
+						<TD>
+								<INPUT TYPE=TEXT NAME=\"T".htmlentities($sid)."\"
+								VALUE=\"".prepare($channel_name)."\">
+						</TD>
+						<TD>".html_form::text_widget("C".htmlentities($sid))."</TD>
+				</TR>
+				";
+                }
+        }
+		print "</TABLE>\n";
+		print "<P><INPUT TYPE=SUBMIT NAME=SUBMIT VALUE=\"Update\"></P>\n";
+		print "</FORM>\n";
+		print_page_close();
+		
+		exit;
+	} // end function eurotv->choose
+
 
 } // end class eurotvCollector
 
