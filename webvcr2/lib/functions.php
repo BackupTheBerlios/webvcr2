@@ -1,5 +1,5 @@
 <?php
-// $Id: functions.php,v 1.4 2002/02/13 01:08:47 waldb Exp $
+// $Id: functions.php,v 1.5 2002/02/15 23:31:43 waldb Exp $
 
 include("global.inc");
 
@@ -168,9 +168,9 @@ function version() {
 function print_title($title) {
 	include ("version.inc");
 	if ( $title == "") {
-		print "<TITLE>WebVCR ($version)</TITLE>\n";
+		print "<TITLE>WebVCR 2 ($version)</TITLE>\n";
 	} else {
-		print "<TITLE>WebVCR ($version): $title</TITLE>\n";
+		print "<TITLE>WebVCR 2 ($version): $title</TITLE>\n";
 	}
 } // end function print_title
 
@@ -196,8 +196,8 @@ function print_header_close() {
 	<tr>
 		<td width=15% valign=top>
 			<p align=center>
-		<a href="http://webvcr.sourceforge.net"><img 
-src="images/webvcr_small.png" alt="WebVCR <?php echo $version; ?>" border=0></a> </p>
+		<a href="http://developer.berlios.de/projects/webvcr2/"><img 
+src="images/webvcr_small.png" alt="WebVCR 2<?php echo $version; ?>" border=0></a> </p>
 			<p align=center>
 			<?php $today = date("j F Y, H:i"); print $today;  ?>
 			</p>
@@ -249,8 +249,12 @@ src="images/webvcr_small.png" alt="WebVCR <?php echo $version; ?>" border=0></a>
 					<td>
 						<TABLE BORDER="0" WIDTH="100%">
 							<TR>
-								<TD ALIGN=CENTER><a href="config.php">Configuration</a></td>
-							</TR><TR>
+								<TD ALIGN=CENTER><a href="config.php">Global Configuration</a></td>
+							</TR>
+							<TR>
+								<TD ALIGN=CENTER><a href="collector.php">Collector Configuration</a></td>
+							</TR>
+							<TR>
 								<TD ALIGN=CENTER><a href="generate_vcrrc.php">Refresh ~/.vcrrc</a></td>
 							</TR>
 						</TABLE>
@@ -271,8 +275,6 @@ src="images/webvcr_small.png" alt="WebVCR <?php echo $version; ?>" border=0></a>
 
 function print_page_close() {
 ?>
-		<p align=right><small>Copyright wim@bofh.be (c) 2001 - <a 
-href="http://webvcr.sourceforge.net">http://webvcr.sourceforge.net</a></small></p>
 		</td>
 	</tr>
 </table>

@@ -8,6 +8,7 @@
 #use strict;
 use LWP;
 use LWP::UserAgent;
+use HTML::Entities;
 use DBI();
 #
 # some global vars
@@ -136,6 +137,7 @@ sub parseinhoud{
       $temp[1]=~ s/\//g; 
       $temp[1]=~ s/\<\/B\>//g;
       chop($temp[0]);
+      decode_entities($temp[1]);
       push(@uur,$temp[0]);
       push(@programma,$temp[1]);
     }
@@ -175,7 +177,7 @@ sub printit {
 	my $date=$year."-".$mon."-".$mday;
       
 	$beginuur=$date." ".$uur[$_];chop($beginuur);
-    $einduur=$date." ".$uur[$_+1];chop($einduur);
+    	$einduur=$date." ".$uur[$_+1];chop($einduur);
 	$station=&getstation($zenders);
 
 	  #print "$beginuur - $einduur\n"; 

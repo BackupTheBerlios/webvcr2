@@ -1,6 +1,11 @@
 ChangeLog
-($Id: ChangeLog,v 1.2 2002/02/12 23:35:52 waldb Exp $)
+($Id: ChangeLog,v 1.3 2002/02/15 23:31:43 waldb Exp $)
 
+* Wed Feb 16 2002 waldb
+  - fixed entities bug
+  - changed configuration menu a little bit
+  - corrected README 
+  - updated logo
 * Wed Feb 13 2002 waldb
   - added old patches from local archive
   - new COPYING file

@@ -1,5 +1,6 @@
 WebVCR-2 cvs 
 (c) 2001 Wim Vandersmissen // wim@bofh.be
+(c) 2002 Waldemar Brodkorb // waldb@users.berlios.de
 GPL
 
 Requirements:
@@ -8,7 +9,7 @@ Requirements:
 	PHP 4.0.4pl1 (with mysql, and curl (http://curl.haxx.se)
 	phpwebtools 0.2.3 (http://phpwebtools.sourceforge.net)
 	Mysql 3.23.36
-	Perl Modules (DBI, LWP, DBD::Mysql) #LWP not really needed anymore
+	Perl Modules (DBI, LWP, DBD::Mysql,HTML-Parser) 
 	VCR (http://www.stack.nl/~brama/vcr/)  (and/or xawtv)
 
 Installation:
@@ -49,7 +50,7 @@ Installation:
 	click on 'run collector' (choose eurotv or advalvas)
 
 	You'll be presented with a list of all possible stations (the program
-	scans and parses the advalvas.be page). 
+	scans and parses the eurotv..com or advalvas.be page). 
 
 	Select the one you like to use (default all are enabled).
 	Next you'll be presented a page with the station names, the right column

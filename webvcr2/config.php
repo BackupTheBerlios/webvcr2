@@ -1,5 +1,5 @@
 <?php
- // $Id: config.php,v 1.2 2002/02/13 01:08:47 waldb Exp $
+ // $Id: config.php,v 1.3 2002/02/15 23:31:43 waldb Exp $
  // $Author: waldb $
 
 include("lib/functions.php");
@@ -114,12 +114,7 @@ print "<td>".html_form::text_widget("timetostart")."</td>\n";
 	print "<td>".html_form::text_widget("timetoend")."</td>\n";
 ?>
 </td>
-<tr>
-<td colspan=3 align=center>
-	<a href="collector.php">Channel Collector Configuration</a>
-</td>
-</tr>
- 
+</tr><tr> 
   <TD COLSPAN=3 ALIGN=CENTER><INPUT TYPE=SUBMIT NAME=SUBMIT VALUE="Save"></TD>
      </TR>
 </TABLE>
