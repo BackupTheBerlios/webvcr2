@@ -4,7 +4,7 @@ use LWP;
 use LWP::UserAgent;
 use DBI();
 
-open(f,"/var/www/html/webvcr/settings.php");
+open(f,"global.inc");
 while(<f>) {
 	if (!/\?/){ eval $_;}
 }

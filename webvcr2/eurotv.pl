@@ -4,14 +4,14 @@ use LWP;
 use LWP::UserAgent;
 use DBI();
 
-open(f,"/var/www/html/webvcr/settings.php");
+open(f,"global.inc");
 while(<f>) {
 	if (!/\?/){ eval $_;}
 }
 close(f);
 
 # Connect to the database.
-my $dbh = DBI->connect("DBI:mysql:database=$database;host=$hostname","$user", "$pass", {'RaiseError' => 1});
+my $dbh = DBI->connect("DBI:mysql:database=$sql_db;host=$sql_host","$sql_user", "$sql_pass", {'RaiseError' => 1});
 
 $dbh->do("delete from program where flag=0 or flag=2 or flag=3"); # don't delete manually recorded programs!
 

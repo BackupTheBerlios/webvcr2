@@ -1,5 +1,5 @@
 <?php
- // $Id: init.php,v 1.2 2002/02/10 10:02:48 waldb Exp $
+ // $Id: init.php,v 1.3 2002/02/10 10:23:06 waldb Exp $
 
 include("global.inc");
 
@@ -119,8 +119,8 @@ if ( isset($PASS) && ($PASS != "") ) {
 	print "reloading priviliges .. <br>";
 
 	print "<h1><font color=\"red\">Important</font></h1>
-	<b>cut and paste these lines to settings.php in the directory where
-	you installed vcrweb (usally /var/www/html/vcrweb)<b><br>";
+	<b>cut and paste these lines to global.inc in the directory where
+	you installed webvcr-2 (usally /var/www/webvcr2)<b><br>";
 	print '<pre>
 	&lt?
 	$sql_host="localhost";

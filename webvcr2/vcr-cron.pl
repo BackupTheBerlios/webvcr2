@@ -1,10 +1,10 @@
 #!/usr/bin/perl 
-# $Id: vcr-cron.pl,v 1.1 2002/02/09 17:45:19 waldb Exp $
+# $Id: vcr-cron.pl,v 1.2 2002/02/10 10:23:06 waldb Exp $
 #
 
 use DBI();
 
-open (f, "/var/www/html/webvcr/settings.php");
+open (f, "global.inc");
 
 while(<f>) {
     if (!/\?/){ eval $_;}

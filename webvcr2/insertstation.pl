@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 use DBI();
 
-open(f,"/var/www/html/webvcr/settings.php");
+open(f,"global.inc");
 while(<f>) {
     if (!/\?/){ eval $_;}
 }
 close(f);
 # Connect to the database.
-my $dbh = DBI->connect("DBI:mysql:database=$database;host=$hostname", "$user", "$pass", {'RaiseError' => 1});
+my $dbh = DBI->connect("DBI:mysql:database=$sql_db;host=$sql_host", "$sql_user", "$sql_pass", {'RaiseError' => 1});
 
  
 @station=("BRT","KETNET","CANVAS","VTM","VT4","KA2","BBC1","BBC2","NED1","NED2",,"NED3");

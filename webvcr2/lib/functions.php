@@ -1,5 +1,5 @@
 <?php
-// $Id: functions.php,v 1.2 2002/02/10 10:02:48 waldb Exp $
+// $Id: functions.php,v 1.3 2002/02/10 10:23:06 waldb Exp $
 
 include("global.inc");
 
@@ -10,8 +10,6 @@ if (!defined("WEBTOOLS_VERSION") or
 		!version_check(WEBTOOLS_VERSION, REQUIRE_WEBTOOLS)) {
 	die(PACKAGE_NAME." requires phpwebtools >= ".REQUIRE_WEBTOOLS);
 }
-
-require_once ("settings.php");
 
 include_once ("lib/module.php");
 include_once ("lib/module_collector.php");
