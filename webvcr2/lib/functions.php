@@ -1,7 +1,7 @@
 <?php
-// $Id: functions.php,v 1.1 2002/02/09 17:45:23 waldb Exp $
+// $Id: functions.php,v 1.2 2002/02/10 10:02:48 waldb Exp $
 
-include_once ("/etc/httpd/php/webtools.php");
+include("global.inc");
 
 define ('PACKAGE_NAME', "WebVCR");
 define ('REQUIRE_WEBTOOLS', "0.2.3");

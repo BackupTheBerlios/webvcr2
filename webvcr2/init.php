@@ -1,7 +1,7 @@
-<?
- // $Id: init.php,v 1.1 2002/02/09 17:45:18 waldb Exp $
+<?php
+ // $Id: init.php,v 1.2 2002/02/10 10:02:48 waldb Exp $
 
-include_once("/etc/httpd/php/webtools.php");
+include("global.inc");
 
 print $PASS;
 if ( isset($PASS) && ($PASS != "") ) {
