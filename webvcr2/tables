@@ -56,4 +56,4 @@ flag=2 (recording when the program already started)
 flag=3 (programma is een film)
 
 savedir standaard /mnt zetten
-collector standaard op 1 zetten
+collector standaard op 2 zetten

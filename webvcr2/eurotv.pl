@@ -67,9 +67,9 @@ foreach $zenders (keys %urls) {
 # checks what number should be used today (because the number of day differs)  #
 ################################################################################
 sub checkhtm {
-  my $now=localtime();
+  my @now=localtime();
   my $tmp;
-  my @tmp;
+  my @tmparray;
   my $inhoud=();
   my $ua = new LWP::UserAgent;
   $ua->agent("Mozilla/4.5 [en] (Win98; I)");
@@ -85,8 +85,8 @@ sub checkhtm {
   my $dagnr=$now[3];
   $tmp=$now[6];
   my $dag=("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")[$tmp];
-  @tmp=split(/\n/,$inhoud);
-  foreach $lijn (@tmp) {
+  @tmparray=split(/\n/,$inhoud);
+  foreach $lijn (@tmparray) {
     while ($lijn =~ /$dag/) {
       $lijn=~ s/\^M//g; 
       if ($lijn =~/\<A HREF=\"(\d).*\>(\w+) (\d+).*\<BR\>/) {

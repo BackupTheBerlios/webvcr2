@@ -1,5 +1,5 @@
 <?php
-// $Id: functions.php,v 1.3 2002/02/10 10:23:06 waldb Exp $
+// $Id: functions.php,v 1.4 2002/02/13 01:08:47 waldb Exp $
 
 include("global.inc");
 
@@ -241,6 +241,9 @@ src="images/webvcr_small.png" alt="WebVCR <?php echo $version; ?>" border=0></a>
 							</tr>
 						</table>
 					</td>
+				</tr>
+				<tr bgcolor="#006666">
+					<td><center><font color="#FFFFFF">Configuration Section</font></center></td>
 				</tr>
                                 <tr bgcolor="#E0E0E0">  
 					<td>

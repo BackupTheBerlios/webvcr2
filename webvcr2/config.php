@@ -1,5 +1,5 @@
 <?php
- // $Id: config.php,v 1.1 2002/02/09 17:45:18 waldb Exp $
+ // $Id: config.php,v 1.2 2002/02/13 01:08:47 waldb Exp $
  // $Author: waldb $
 
 include("lib/functions.php");
@@ -43,7 +43,7 @@ print_header_close();
 <FORM ACTION="config.php" METHOD=POST>
 <center>
 <table border=1><tr bgcolor="#006666">
-<td><center><font color="#FFFFFF">WebVCR Configuration</font></center></td>
+<td><center><font color="#FFFFFF">WebVCR 2 Configuration</font></center></td>
 </tr>
 <tr bgcolor="#E0E0E0"><td>
 <table border=0>
